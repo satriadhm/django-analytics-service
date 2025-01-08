@@ -1,7 +1,8 @@
+import uuid
 from django.db import models
 
 class Analytic(models.Model):
-    id = models.UUIDField(primary_key=True, editable=False)
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     source = models.CharField(max_length=255)
     medium = models.CharField(max_length=255)
     campaign = models.CharField(max_length=255)
