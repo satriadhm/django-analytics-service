@@ -7,6 +7,7 @@ from rest_framework.response import Response
 from django.db.models import Count
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import filters
+from rest_framework.permissions import IsAuthenticated
 
 class AnalyticCreateView(generics.CreateAPIView):
     queryset = Analytic.objects.all()
@@ -28,6 +29,7 @@ class AnalyticCreateView(generics.CreateAPIView):
         serializer.save(ip=ip, country=country, city=city)
 
 class AnalyticListView(generics.ListAPIView):
+    permission_classes = [IsAuthenticated]
     queryset = Analytic.objects.all()
     serializer_class = AnalyticSerializer
     filter_backends = [DjangoFilterBackend, filters.OrderingFilter, filters.SearchFilter]
